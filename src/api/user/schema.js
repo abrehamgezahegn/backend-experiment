@@ -15,6 +15,7 @@ const User = gql`
     lastName: String!
     email: String!
     phoneNumber: String!
+    role: UserRole
   }
 
   type User {
@@ -23,6 +24,13 @@ const User = gql`
     lastName: String!
     email: String!
     phoneNumber: String!
+    role: UserRole
+    orders: [Order]
+  }
+
+  enum UserRole {
+    Courier
+    Supplier
   }
 `;
 

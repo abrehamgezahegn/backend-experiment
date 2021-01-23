@@ -1,5 +1,9 @@
-const { GetUser } = require("./queries/getUser");
+const { GetOne } = require("./queries/getOne");
+const { GetAll } = require("./queries/getAll");
+const { Create } = require("./mutations/create");
 
 module.exports = {
-  GetUser,
+  GetOne,
+  GetAll,
+  Create,
 };

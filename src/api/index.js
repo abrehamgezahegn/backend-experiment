@@ -1,16 +1,25 @@
 const { makeExecutableSchema } = require("@graphql-tools/schema");
+const GraphQLJSON = require("graphql-type-json");
 
 const User = require("./user/schema");
 const userResolver = require("./user/resolver");
 
+const Order = require("./order/schema");
+const orderResolver = require("./order/resolver");
+
 const services = require("../services");
 
 const schema = makeExecutableSchema({
-  typeDefs: [User],
+  typeDefs: [User, Order],
   resolvers: {
     Query: {
       ...userResolver.Query,
+      ...orderResolver.Query,
     },
+    Mutation: {
+      ...userResolver.Mutation,
+    },
+    // JSON: GraphQLJSON,
   },
 });
 
