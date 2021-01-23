@@ -1,6 +1,8 @@
 const { makeExecutableSchema } = require("@graphql-tools/schema");
 const GraphQLJSON = require("graphql-type-json");
 
+const model = require("../database/models");
+
 const User = require("./user/schema");
 const userResolver = require("./user/resolver");
 
@@ -27,7 +29,7 @@ const api = {
   schema,
   context: (req) => ({
     req,
-    // model,
+    model,
     // utils,
     services,
     auth: () => {

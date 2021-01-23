@@ -1,6 +1,7 @@
 const { ApolloServer } = require("apollo-server-express");
 const express = require("express");
 const knex = require("knex");
+const { Model } = require("objection");
 
 const api = require("./api");
 
@@ -10,6 +11,18 @@ const app = express();
 // const path = "/graphql";
 
 // app.use(path, (req, res, next) => checkJwt(req, res, next));
+
+const knexConnection = knex({
+  client: "postgres",
+  connection: {
+    host: "localhost",
+    user: "abreham_g",
+    password: "mynameis12@P",
+    database: "kuli",
+  },
+});
+
+Model.knex(knexConnection);
 
 const apolloServer = new ApolloServer(api);
 
@@ -48,6 +61,9 @@ app.listen({ port: 4000 }, () =>
       - Why is the use of this kind of types?  Resolver<Partial<Review> ?
         I think they are interfaces.
       - What does purpose of using find-config
-      - 
+      - How does relations work? Graphql vs./and objection
+      - Avoiding require loop by importing models inside the
+        relationMappings method.
+      - Why do we use plural nouns when writing relations
 
 */
