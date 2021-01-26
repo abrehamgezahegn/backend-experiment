@@ -3,6 +3,7 @@ exports.up = function (knex) {
     knex.raw('create extension if not exists "uuid-ossp"'),
     knex.schema.createTable("orders", (table) => {
       table.uuid("id").primary().defaultTo(knex.raw("uuid_generate_v4()"));
+      table.uuid("userId");
       table.string("pickUpCountry");
       table.string("destinationCountry");
       table.dateTime("createdAt").defaultTo(knex.raw("CURRENT_TIMESTAMP"));

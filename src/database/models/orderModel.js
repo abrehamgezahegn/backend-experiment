@@ -16,6 +16,9 @@ class Order extends Model {
         destinationCountry: {
           type: "string",
         },
+        userId: {
+          type: "string",
+        },
       },
     };
   }
@@ -28,7 +31,7 @@ class Order extends Model {
         relation: Model.BelongsToOneRelation,
         modelClass: User,
         join: {
-          from: "orders.id",
+          from: "orders.userId",
           to: "users.id",
         },
       },
