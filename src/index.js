@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const { ApolloServer } = require("apollo-server-express");
 const express = require("express");
 const knex = require("knex");
@@ -11,14 +13,13 @@ const app = express();
 // const path = "/graphql";
 
 // app.use(path, (req, res, next) => checkJwt(req, res, next));
-
 const knexConnection = knex({
   client: "postgres",
   connection: {
-    host: "localhost",
-    user: "abreham_g",
-    password: "mynameis12@P",
-    database: "kuli",
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
   },
 });
 
@@ -52,18 +53,52 @@ app.listen({ port: 4000 }, () =>
 
 /*
 
-    QUESTIONS 
-      - How do we do error handling?
-      - Why are you not using unions?
-      - Can the service methods be improved to receive 
-        a uniform parameters?
-      - The JSON type is not working for me
-      - Why is the use of this kind of types?  Resolver<Partial<Review> ?
-        I think they are interfaces.
-      - What does purpose of using find-config
-      - How does relations work? Graphql vs./and objection
-      - Avoiding require loop by importing models inside the
-        relationMappings method.
-      - Why do we use plural nouns when writing relations
+QUESTIONS 
+   
+*These questions are general questions but are  based on the financr backend code base.
+
+    How do you handle errors?
+
+    Is there any reason why you are not using unions in the graphql schema?
+
+    Why is the purpose of using interface types to type the methods and functions?
+    Service functions for example.
+    
+    const FetchAll = async (args: QueryMessagesArgs
+    ): Promise<Partial<Message>[]>
+    
+    What is the purpose of using find-config?
+
+    import dotEnv from "dotenv";
+    import findConfig from "find-config";
+    dotEnv.config({ path: findConfig(`.env`)! });
+
+
+    How does table relations work between graphql and objection ?
+
+    You are not avoiding require loop by importing models inside the
+    relationMappings method. But that doesn't seem to break the code. 
+    Why is that?
+
+    What's the point of objection's relational mapping if the relation is laid out in the graphql schema?
+
+    What is seed in the context of databases?
+
+    
+    Is there any reason you put nested resolvers directly inside the services (custom folder) but not in the resolver file of the schema?  
+
+    Can you go over the structure of the webhooks?
+
+    I couldn't find any aws cognito code in the codebase. Is the auth handled only by aws? If so how does the backend access the users?
+
+
+
+
+
+
+
+
+
+
 
 */

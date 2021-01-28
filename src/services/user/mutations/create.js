@@ -1,7 +1,9 @@
+const { User } = require("../../../database/models");
+
 exports.Create = async (args) => {
-  // do some db work
-  return {
-    id: "123sa923hbuidasd",
+  const user = await User().insert({
     ...args.data,
-  };
+  });
+
+  return user;
 };

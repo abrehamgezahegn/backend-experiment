@@ -20,8 +20,15 @@ const schema = makeExecutableSchema({
     },
     Mutation: {
       ...userResolver.Mutation,
+      ...orderResolver.Mutation,
     },
-    // JSON: GraphQLJSON,
+    User: {
+      ...userResolver.User,
+    },
+    Order: {
+      ...orderResolver.Order,
+    },
+    JSON: GraphQLJSON,
   },
 });
 

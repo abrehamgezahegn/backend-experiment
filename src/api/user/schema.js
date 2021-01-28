@@ -1,16 +1,18 @@
-const { gql } = require("apollo-server-express");
+// const { gql } = require("apollo-server-express");
 
-const User = gql`
+const User = /* GraphQL */ `
+  # directive @auth()
+
   type Query {
     user(id: ID!): User
     users: [User]
   }
 
   type Mutation {
-    createUser(data: createUserInput): User
+    createUser(data: CreateUserInput): User
   }
 
-  input createUserInput {
+  input CreateUserInput {
     firstName: String!
     lastName: String!
     email: String!
@@ -26,6 +28,7 @@ const User = gql`
     phoneNumber: String!
     role: UserRole
     orders: [Order]
+    fullName: String
   }
 
   enum UserRole {
