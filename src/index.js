@@ -7,23 +7,21 @@ const { Model } = require("objection");
 
 const api = require("./api");
 
+const dbConfig = require("./database/knexfile");
+const webhook = require("./webhooks");
+
 const app = express();
 // The ApolloServer constructor requires two parameters: your schema
 // definition and your set of resolvers.
 // const path = "/graphql";
 
 // app.use(path, (req, res, next) => checkJwt(req, res, next));
-const knexConnection = knex({
-  client: "postgres",
-  connection: {
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-  },
-});
+const env = process.env.NODE_ENV || "development";
+const knexConnection = knex(dbConfig[env]);
 
 Model.knex(knexConnection);
+
+webhook(app);
 
 const apolloServer = new ApolloServer(api);
 

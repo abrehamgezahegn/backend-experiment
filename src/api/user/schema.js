@@ -34,6 +34,7 @@ const User = /* GraphQL */ `
   enum UserRole {
     Courier
     Supplier
+    Artist
   }
 `;
 

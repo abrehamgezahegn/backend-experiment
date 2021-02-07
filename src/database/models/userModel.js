@@ -1,4 +1,5 @@
 const { Model } = require("objection");
+const models = require("./index");
 
 class User extends Model {
   static get tableName() {
@@ -26,18 +27,29 @@ class User extends Model {
   }
 
   static get relationMappings() {
-    const Order = require("./orderModel");
     return {
       orders: {
         relation: Model.HasManyRelation,
-        modelClass: Order,
+        modelClass: models.Order,
         join: {
           from: "users.id",
           to: "orders.userId",
+        },
+      },
+      pages: {
+        relation: Model.ManyToManyRelation,
+        modelClass: models.Page,
+        join: {
+          from: "users.id",
+          through: {
+            from: "page_membership.userId",
+            to: "page_membership.pageId",
+          },
+          to: "page.id",
         },
       },
     };
   }
 }
 
-module.exports = () => User.query();
+module.exports = User;
