@@ -10,8 +10,7 @@ const webhook = (app) => {
   app.use("/webhook", webhookRoutes);
 
   app.get("/", (req, res) => {
-    console.log("webhook running");
-    res.json("Webhook running");
+    res.json("Server 🚀 and 🏃");
   });
 };
 

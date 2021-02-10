@@ -26,28 +26,23 @@ webhook(app);
 const apolloServer = new ApolloServer(api);
 
 apolloServer.applyMiddleware({ app });
-app.listen({ port: 4000 }, () =>
-  console.info(
-    `🚀 Server ready at http://localhost:4000${apolloServer.graphqlPath}`
-  )
-);
 
-// const HOSTNAME = process.env.HOSTNAME || "0.0.0.0";
-// const PORT = Number(process.env.PORT) || 4000;
+const HOSTNAME = process.env.HOSTNAME || "0.0.0.0";
+const PORT = Number(process.env.PORT) || 4000;
 
-// const server = app.listen(PORT, HOSTNAME, () => {
-//   const address = server.address();
-//   const origin = !address
-//     ? "unknown address"
-//     : typeof address === "string"
-//     ? address
-//     : "http://" + address.address + ":" + address.port;
+const server = app.listen(PORT, HOSTNAME, () => {
+  const address = server.address();
+  const origin = !address
+    ? "unknown address"
+    : typeof address === "string"
+    ? address
+    : "http://" + address.address + ":" + address.port;
 
-//   console.info(`\nExpress server listening at ${origin}`);
-//   console.info(
-//     `\nGraphQL ready at ${address ? origin : ""}${apolloServer.graphqlPath}`
-//   );
-// });
+  console.log(`\nExpress server listening at ${origin}`);
+  console.log(
+    `\nGraphQL ready at ${address ? origin : ""}${apolloServer.graphqlPath}`
+  );
+});
 
 /*
 

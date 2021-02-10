@@ -1,5 +1,6 @@
 exports.up = function (knex) {
   return Promise.all([
+    knex.raw('create extension if not exists "uuid-ossp"'),
     knex.schema.createTable("pages_users__users_pages", (table) => {
       table.uuid("id").primary().defaultTo(knex.raw("uuid_generate_v4()"));
       table

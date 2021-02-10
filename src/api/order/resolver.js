@@ -8,7 +8,8 @@ const createOrder = (_, args, { services }) => {
 
 const user = async (parent, args, { services }) => {
   // batching
-  return await services.User.GetOneLoader.load(parent.userId);
+  if (parent.userId)
+    return await services.User.GetOneLoader.load(parent.userId);
 };
 
 module.exports = {

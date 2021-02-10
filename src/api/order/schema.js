@@ -15,7 +15,7 @@ const Order = gql`
     id: ID!
     pickUpCountry: String!
     destinationCountry: String!
-    user(email: String): User!
+    user(email: String): User
     details: JSON
   }
 

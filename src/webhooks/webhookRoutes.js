@@ -1,4 +1,5 @@
 const express = require("express");
+const { updateOrder } = require("./actions/order");
 
 const app = express.Router();
 
@@ -19,7 +20,8 @@ app.post("/", async (req, res) => {
   const updateHandler = () => {
     switch (req.body.model) {
       case "order": {
-        console.log("order updated from strapi");
+        updateOrder(req.body.entry);
+
         break;
       }
     }
