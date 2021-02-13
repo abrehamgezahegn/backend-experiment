@@ -42,6 +42,7 @@ const server = app.listen(PORT, HOSTNAME, () => {
   console.log(
     `\nGraphQL ready at ${address ? origin : ""}${apolloServer.graphqlPath}`
   );
+  console.log("\n Server running with env", process.env.NODE_ENV);
 });
 
 /*

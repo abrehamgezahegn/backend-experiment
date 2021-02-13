@@ -26,6 +26,6 @@
   },
   "scripts": {
     "dev": "nodemon src/index.js",
-    "worker:userUpdate": "node src/workers/userUpdate/consumer.js"
+    "workers": "node src/workers/consumers.js"
   }
 }

@@ -11,18 +11,20 @@ Model.knex(knexConnection);
 
 const { User } = require("../../database/models");
 
-const Queue = require("bull");
+// const Queue = require("bull");
 
-const updateUser = new Queue("update-user");
+// const updateUser = new Queue("update-user");
 
 console.log("User update consumer is running");
 
-updateUser.process(async (job, done) => {
+// updateUser.process(
+const updateUser = async (job, done) => {
+  console.log("update user worker ran");
   const user = job.data.user;
   const randomNum = Math.random() * 100;
   const randString = JSON.stringify(randomNum).slice(0, 3);
   console.log("updating with", randString);
-  console.log("jobs", await updateUser.getJobCounts());
+  // console.log("jobs", await job.getJobCounts());
   try {
     const res = await User.query()
       .findById(user.id)
@@ -30,12 +32,17 @@ updateUser.process(async (job, done) => {
         ...user,
         lastName: "consumed" + randString,
       });
-    console.log("updated user", res);
+    console.log("updated user");
+    throw new Error("baba");
     done();
   } catch (error) {
-    console.log("error ", error);
+    console.log("bubble spaceee ", error);
   }
-});
+};
+
+module.exports = updateUser;
+
+// );
 
 /*
  - how are consumers deployed?

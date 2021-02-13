@@ -1,5 +1,6 @@
 const DataLoader = require("dataloader");
 const updateUserInfo = require("../../../workers/userUpdate/producer");
+const sendWeeklyEmail = require("../../../workers/sendWeeklyEmail/producer");
 
 const { User } = require("../../../database/models");
 const GetOne = async ({ id }) => {
@@ -25,6 +26,7 @@ const GetOne = async ({ id }) => {
   const user = await User.query().findById(id);
   if (!user) throw new Error("user doesn't exist");
   const res = await updateUserInfo({ user });
+  const emailRes = await sendWeeklyEmail({ to: "shit@happening.com" });
   // console.log("update user producer res", res);
   return user;
 };
