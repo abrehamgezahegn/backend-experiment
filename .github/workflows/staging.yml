@@ -23,7 +23,8 @@ jobs:
           access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           region: eu-central-1
-          image: kuli:staging
+          image: kuli-staging
+          local-image: kuli:staging
       - name: Restart the ECS tasks
         run: |
           aws ecs update-service --service kuli-staging --cluster kuli-staging --force-new-deployment --region  us-east-1
