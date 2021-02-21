@@ -6,7 +6,6 @@ const user = async (_, args, { req, model, utils, services, auth }) => {
 };
 
 const users = async (_, args, { req, model, utils, services, auth }, info) => {
-  console.log("users resolver hit");
   auth();
   return await services.User.GetAll(args);
 };

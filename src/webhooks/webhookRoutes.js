@@ -4,10 +4,6 @@ const { updateOrder } = require("./actions/order");
 const app = express.Router();
 
 app.post("/", async (req, res) => {
-  console.log("webhook / route", "req", req.body.event);
-  console.log("web hook body", req.body.model);
-  console.log("web hook data", req.body.entry.users);
-
   const createHandler = () => {
     switch (req.body.model) {
       case "order": {

@@ -17,6 +17,7 @@ const app = express();
 
 // app.use(path, (req, res, next) => checkJwt(req, res, next));
 const env = process.env.NODE_ENV || "development";
+console.log("jknex env", dbConfig[env]);
 const knexConnection = knex(dbConfig[env]);
 
 Model.knex(knexConnection);
