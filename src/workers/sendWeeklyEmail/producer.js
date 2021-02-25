@@ -1,6 +1,7 @@
 const Queue = require("bull");
+const redisConfig = require("../config");
 
-const sendEmail = new Queue("send-weekly-email");
+const sendEmail = new Queue("send-weekly-email", redisConfig);
 
 const sendWeeklyEmail = async (data) => {
   console.log("adding email job ");

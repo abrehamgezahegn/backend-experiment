@@ -1,6 +1,7 @@
 const Queue = require("bull");
+const redisConfig = require("../config");
 
-const updateUser = new Queue("update-user");
+const updateUser = new Queue("update-user", redisConfig);
 
 const updateUserInfo = async (data) => {
   console.log("adding user job ");
