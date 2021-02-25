@@ -17,4 +17,4 @@ const opts = {
   },
 };
 
-export default opts;
+module.exports = opts;
